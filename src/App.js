@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [value, setValue] = useState(0);
+
+    const handlerIncrement = () => {
+        setValue(value + 1);
+    };
+
+    const handlerDecrement = () => {
+        setValue(value - 1);
+    };
+
+    return (
+        <div className="App">
+            <h1>React testing</h1>
+            <button onClick={handlerIncrement}>Increment</button>
+            <button onClick={handlerDecrement}>Decrement</button>
+            <input value={value}></input>
+        </div>
+    );
 }
 
 export default App;
