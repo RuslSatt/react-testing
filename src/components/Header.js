@@ -9,6 +9,9 @@ export const Header = () => {
             <Link data-testid="about-link" to={'/about'}>
                 About
             </Link>
+            <Link data-testid="posts-link" to={'/posts'}>
+                Posts
+            </Link>
         </div>
     );
 };
