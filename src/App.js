@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { MainPage } from './pages/MainPage';
-import { AboutPage } from './pages/AboutPage';
-import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
-import { ErrorPage } from './pages/ErrorPage';
-import { PostPage } from './pages/PostPage';
-import Posts from './posts/Posts';
+import { AppRouter } from './router/AppRouter';
 
 function App() {
     const [data, setData] = useState(null);
@@ -30,13 +25,7 @@ function App() {
         <div className="App">
             <Header />
             <div className="Pages">
-                <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/posts" element={<Posts />} />
-                    <Route path="/posts/:id" element={<PostPage />} />
-                    <Route path="/*" element={<ErrorPage />} />
-                </Routes>
+                <AppRouter />
             </div>
             <div>
                 {data && <div>Has data in the page</div>}

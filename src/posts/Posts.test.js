@@ -1,11 +1,9 @@
 /* eslint-disable testing-library/no-unnecessary-act */
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
-import Posts from './Posts';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
-import { PostPage } from '../pages/PostPage';
+import { renderTestRouters } from '../helpers/renderTestRouters';
 
 jest.mock('axios');
 
@@ -30,11 +28,7 @@ describe('test get data', () => {
 
     test('get data', async () => {
         axios.get.mockReturnValue(response);
-        render(
-            <MemoryRouter>
-                <Posts />
-            </MemoryRouter>
-        );
+        renderTestRouters(null, '/posts');
         const posts = await screen.findAllByTestId('post');
         expect(posts.length).toBe(2);
         expect(axios.get).toHaveBeenCalledTimes(1);
@@ -42,14 +36,7 @@ describe('test get data', () => {
 
     test('redirect to the post page', async () => {
         axios.get.mockReturnValue(response);
-        render(
-            <MemoryRouter initialEntries={['/posts']}>
-                <Routes>
-                    <Route path="/posts" element={<Posts />} />
-                    <Route path="/posts/:id" element={<PostPage />} />
-                </Routes>
-            </MemoryRouter>
-        );
+        renderTestRouters(null, '/posts');
         const posts = await screen.findAllByTestId('post');
         expect(posts.length).toBe(2);
         await act(() => {
