@@ -19,7 +19,7 @@ const Posts = () => {
     }, []);
 
     return (
-        <div>
+        <div data-testid="posts-page">
             {posts.map((post) => (
                 <Link to={`/posts/${post.id}`} key={post.id} data-testid="post">
                     {post.title}

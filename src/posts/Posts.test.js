@@ -26,8 +26,15 @@ describe('test get data', () => {
         };
     });
 
-    test('get data', async () => {
+    beforeEach(() => {
         axios.get.mockReturnValue(response);
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    test('get data', async () => {
         renderTestRouters(null, '/posts');
         const posts = await screen.findAllByTestId('post');
         expect(posts.length).toBe(2);
@@ -35,7 +42,6 @@ describe('test get data', () => {
     });
 
     test('redirect to the post page', async () => {
-        axios.get.mockReturnValue(response);
         renderTestRouters(null, '/posts');
         const posts = await screen.findAllByTestId('post');
         expect(posts.length).toBe(2);
